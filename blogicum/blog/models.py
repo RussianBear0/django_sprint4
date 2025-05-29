@@ -69,6 +69,11 @@ class Post(BaseModel):
     image = models.ImageField("Фото", blank=True)
 
     @staticmethod
+    def comment_count(self):
+        if hasattr(self, '_comment_count'):
+            return self._comment_count
+        return self.comments.count()
+        
     def get_posts(**kwargs):
         return (
             Post.objects.select_related("category", "location", "author")
